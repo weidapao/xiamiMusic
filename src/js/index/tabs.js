@@ -1,6 +1,6 @@
 {
   let view = {
-    el: '#tabs',
+    el: '#newtab',
     init(){
       this.$el = $(this.el)
     }
@@ -14,14 +14,10 @@
       this.bindEvents()
     },
     bindEvents(){
-      this.view.$el.on('click', '.tabs-nav > li', (e)=>{
-        let $li = $(e.currentTarget)
-        let tabName = $li.attr('data-tab-name')
-        console.log('$li')
-        console.log($li)
-        console.log('tabName')
-        console.log(tabName)
-        $li.addClass('active')
+      this.view.$el.on('click', 'a', (e)=>{
+        let $a = $(e.currentTarget)
+        let tabName = $a.attr('data-tab-name')
+        $a.addClass('active')
           .siblings().removeClass('active')
         window.eventHub.emit('selectTab', tabName)
       }) 

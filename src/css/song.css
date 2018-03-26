@@ -1,50 +1,144 @@
-*{margin:0; padding: 0; box-sizing: border-box;}
-*::before, *::after{box-sizing: border-box; }
-
-@keyframes circle{
-  0% {transform: rotate(0deg); } 
-  100% {transform: rotate(360deg); } 
+/* red: #D43C33 */
+/* grey: #888 */
+*{margin:0;padding:0;}
+*{box-sizing: border-box;}
+*::after{box-sizing: border-box;}
+*::before{box-sizing: border-box;}
+html{
+  font-size: 62.5%;
+  font-family: sans-serif;
 }
-
-.page{display: flex; flex-direction: column; height: 100vh;
-	background: transparent url(http://p3.music.126.net/z4p2xss2a50qNHe6TLFdoA==/2425522650910827.jpg) no-repeat center;
-	background-size: cover;
+a{color: inherit; text-decoration: none;background: transparent;}
+a:link, a:visited {
+  text-decoration: none;
+  color: #333;
 }
-
-.disc-container{position: relative; }
-.disc-container .icon-wrapper{position: absolute; z-index: 1; display: flex; 
-	justify-content: center; align-items: center;
-	border: 1px solid white; height: 20vw; width: 20vw;
-	border-radius: 50%; background: rgba(0,0,0,0.5);
+a:-webkit-any-link {
+  cursor: auto;
 }
-.disc-container .icon {width: 10vw; fill: white;}
-.disc-container .pointer{width: 24vw; position: absolute; left: 45vw; }
-.disc-container .disc{display: flex; justify-content: center; align-items: center; margin-top: 18vw; }
-.disc-container .ring{width: 72vw; } 
-.disc-container .light{width: 72vw; position: absolute; }
-.disc-container .cover{width: 44.5vw; position: absolute; border-radius: 50%;  
-  animation: circle 20s infinite linear; 
-  animation-play-state: paused;
+a {
+  background: transparent;
 }
-.disc-container.playing .light,
-.disc-container.playing .cover{
-  animation-play-state: running;
+img{
+  border: 0;
+  display: block;
 }
-
-.disc-container .icon-pause{display: none; }
-.disc-container.playing .icon-pause{display: block; }
-.disc-container.playing .icon-play{display: none; }
-
+ul,ol{list-style: none;}
+h1,h2,h3,h4,h5,h6{ font-weight: normal; }
+.page{
+  height: 100vh;
+  /* background: black; */
+}
+.navs {
+  width: 100%;
+  position: relative;
+  z-index: 4;
+  left: 0;
+}
+.navs .nav-back {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.navs .nav {
+  width: 100%;
+  height: 4rem;
+  box-shadow: 0 2px 3px rgba(0,0,0,.2);
+  background-color: rgba(249,249,249,.6);
+  background-image: linear-gradient(to bottom,rgba(249,249,249,.8),rgba(235,235,235,.8));
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  font-size: 1.6rem;
+}
+.navs .nav-back .btn-back {
+  width: 4.2rem;
+  height: 4.2rem;
+  margin-top: -.2rem;
+  margin-left: -.2rem;
+  float: left;
+  position: relative;
+}
+.navs .nav-back .btn-back:after {
+  content: '';
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-left: #444 1px solid;
+  border-bottom: #444 1px solid;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -.8rem 0 0 -.8rem;
+}
+.navs .nav-back .tit {
+  width: 100%;
+  height: 4rem;
+  line-height: 4rem;
+  color: #262b2f;
+  padding: 0 3rem;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  margin-left: -4rem;
+}
+.content{
+  position: relative;
+  padding-top: 4rem;
+  text-align: center;
+}
+.title{
+  /* padding: 1.25rem 0; */
+  font-size: 1.4rem;
+}
+.title .jiaban{
+  color: #fff;
+  margin: 0 20px;
+  padding-top: 10px;
+  padding-bottom: 4px;
+  text-align: center;
+  line-height: 20px;
+}
+.title .jiaban1{
+  font-size: 1.2rem;
+  position: relative;
+  color: #fff;
+}
+.content .cover {
+  max-width: 50%;
+  min-height: 80px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 14px;
+}
+ .cover .img1 {
+  width: 100%;
+}
+ .cover .btn {
+  display: block;
+  width: 52px;
+  height: 52px;
+  background-size: 104px 138px;
+  background-image: url(../img/TB11sQgNVXXXXXGXFXXXXXXXXXX-208-276.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -26px 0 0 -26px;
+}
+.cover .pause {
+  background-position: -54px -56px;
+}
 .song-description{
-	flex-grow: 1;
-	color: #AEABAC;
+  color: #AEABAC;
 	text-align: center;
 	line-height: 2;
-	margin-top: 20px;
-}
-.song-description h1{
-	color: white;
-	font-size: 18px;
+	margin-top: 40px;
 }
 .song-description p{
 	font-size: 14px;
@@ -60,26 +154,79 @@
 .song-description p.active{
 	color: white;
 }
-
-.page > .links{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #D43B32;
+.fake-btn {
+  background-image: url(../img/TB17wdHKFXXXXbTXFXXXXXXXXXX-670-46.png);
+  width: 90%;
+  height: 2.3rem;
+  background-size: contain;
+  margin: 2rem auto;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.page > .links > a{
-	width: 38.5vw;
-	margin: 1em;
-	text-align: center;
-	border: 1px solid #D43B32;
-	background: transparent;
-	padding: 1.5vw;
-	color: inherit;
-	text-decoration: none;
-	border-radius: 1.3vw;
-	letter-spacing: 1vw;
+.download{
+  margin-top: 5rem;
+  height:10rem;
+  position: relative;
 }
-.page > .links > a.main{
-	background: #D43B32;
-	color: white;
-}	
+.download .btn {
+  background-color: #f60;
+  width: 19.4rem;
+  height: 3.5rem;
+  padding-right: 2.8rem;
+  line-height: 3.5rem;
+  display: block;
+  text-align: right;
+  color: #fff;
+  text-decoration: none;
+  -webkit-border-radius: 3.5rem;
+  border-radius: 3.5rem;
+  margin: 0 auto;
+  position: relative;
+  font-size: 1.6rem;
+}
+.download .btn:before {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  left: 3rem;
+  top: 50%;
+  margin-top: -1.1rem;
+  background-size: 10.4rem 13.8rem;
+  background-image: url(../img/TB11sQgNVXXXXXGXFXXXXXXXXXX-208-276.png);
+  background-repeat: no-repeat;
+  background-position: -2.4rem -12rem;
+}
+ .mask {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+ .album-cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1.2rem);
+  -webkit-filter: blur(1.2rem);
+  -webkit-transform: scale(1.05);
+}
+.cover-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+}

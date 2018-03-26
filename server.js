@@ -18,9 +18,9 @@ var server = http.createServer(function(request, response){
   var query = parsedUrl.query
   var method = request.method
 
-  /******** 从这里开始看，上面不要看 ************/
 
-  console.log('方方说：含查询字符串的路径\n' + pathWithQuery)
+
+  console.log('含查询字符串的路径\n' + pathWithQuery)
 
   if(path==='/uptoken'){
     console.log(111);
@@ -51,9 +51,8 @@ var server = http.createServer(function(request, response){
     response.end()
   }
 
-  /******** 代码结束，下面不要看 ************/
 })
 
 server.listen(port)
-console.log('监听 ' + port + ' 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:' + port)
+console.log('监听 ' + port + ' 成功\n请打开 http://localhost:' + port)
 

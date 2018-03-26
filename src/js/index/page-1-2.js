@@ -1,20 +1,11 @@
 {
   let view = {
-    el: 'section.songs',
+    el: '#newsonglist',
     template:`
-        <li>
-          <h3>{{song.name}}</h3>
-          <p>
-            <svg class="icon icon-sq">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-sq"></use>
-            </svg>
-            {{song.singer}}
-          </p>
-          <a class="playButton" href="./song.html?id={{song.id}}">
-            <svg class="icon icon-play">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-play"></use>
-            </svg>
-          </a>
+        <li class="line" data-way="./song.html?id={{song.id}}">
+          <p class="song-name">{{song.name}}</p>
+          <p class="singer-name">{{song.singer}}</p>
+          <a class="playButton" href="./song.html?id={{song.id}}"></a>
         </li>
     `,
     init(){
@@ -28,7 +19,8 @@
           .replace('{{song.singer}}', song.singer)
           .replace('{{song.id}}', song.id)
         )
-        this.$el.find('ol.list').append($li)
+        console.log(this.$el.find('ul.line'))
+        this.$el.find('ul').append($li)
       })
     }
   }
@@ -53,10 +45,21 @@
       this.view = view
       this.view.init()
       this.model = model
+      this.bindEvents()
       this.model.find().then(()=>{
         this.view.render(this.model.data)
       })
 
+    },
+    bindEvents(){
+      this.view.$el.on('click', 'ul>li', (e)=>{
+        let $a = $(e.currentTarget)
+        let songid = $a.attr('data-way')
+        $a.addClass('current')
+          .siblings().removeClass('current')
+        window.eventHub.emit('clickLi', songid);
+        window.location.href=songid;
+      }) 
     }
   }
   controller.init(view, model)

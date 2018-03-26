@@ -6,8 +6,8 @@
     },
     render(data){
       let {song, status} = data
-      this.$el.find('#zhaozi').css('background-image', `url(${song.cover})`)
-      this.$el.find('img.img1').attr('src', song.cover)
+      this.$el.css('background-image', `url(${song.cover})`)
+      this.$el.find('img.cover').attr('src', song.cover)
       if(this.$el.find('audio').attr('src') !== song.url){
         let audio = this.$el.find('audio').attr('src', song.url).get(0)
         audio.onended = ()=>{ window.eventHub.emit('songEnd') }
@@ -15,13 +15,11 @@
 
       }
       if(status === 'playing'){
-        this.$el.find('#playBtn').removeClass('play').addClass('pause')
+        this.$el.find('.disc-container').addClass('playing')
       }else{
-        this.$el.find('#playBtn').removeClass('pause').addClass('play')
+        this.$el.find('.disc-container').removeClass('playing')
       }
-      this.$el.find('.tit').text(song.name)
-      this.$el.find('#song_x').text(song.name)
-      this.$el.find('#singer_x').text(song.singer)
+      this.$el.find('.song-description>h1').text(song.name)
       let {lyrics} = song
       lyrics.split('\n').map((string)=>{
         let p = document.createElement('p')
@@ -43,7 +41,6 @@
 
     },
     showLyric(time){
-      console.log(time)
       let allP = this.$el.find('.lyric>.lines>p')
       let p 
       for(let i =0;i<allP.length;i++){
@@ -59,7 +56,6 @@
           }
         }
       }
-      // console.log(p);
       let pHeight = p.getBoundingClientRect().top
       let linesHeight = this.$el.find('.lyric>.lines')[0].getBoundingClientRect().top
       let height = pHeight - linesHeight
@@ -107,22 +103,15 @@
       this.bindEvents()
     },
     bindEvents(){
-      $(this.view.el).on('click', '#dalao .play', (e)=> {
-        e.preventDefault();
+      $(this.view.el).on('click', '.icon-play', ()=> {
         this.model.data.status = 'playing'
         this.view.render(this.model.data)
         this.view.play()
-        e.stopPropagation(); 
       })
-      $(this.view.el).on('click', '#dalao .pause', (e)=> {
-        e.preventDefault();
+      $(this.view.el).on('click', '.icon-pause', ()=> {
         this.model.data.status = 'paused'
         this.view.render(this.model.data)
         this.view.pause()
-        e.stopPropagation(); 
-      })
-      $(this.view.el).on('click', '.btn-back', ()=> {
-        window.history.go(-1);
       })
       window.eventHub.on('songEnd', ()=>{
         this.model.data.status = 'paused'
