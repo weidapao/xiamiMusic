@@ -19,7 +19,7 @@
           .replace('{{song.singer}}', song.singer)
           .replace('{{song.id}}', song.id)
         )
-        console.log(this.$el.find('ul.line'))
+        // console.log(this.$el.find('ul.line'))
         this.$el.find('ul').append($li)
       })
     }

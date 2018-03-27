@@ -43,7 +43,7 @@
 
     },
     showLyric(time){
-      console.log(time)
+      // console.log(time)
       let allP = this.$el.find('.lyric>.lines>p')
       let p 
       for(let i =0;i<allP.length;i++){

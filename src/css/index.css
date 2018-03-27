@@ -74,7 +74,8 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 }
 .navs .nav .active {
   color: #ff5800;
-  box-shadow: inset 0 -2px 0 #ff5800;
+  /* box-shadow: inset 0 -2px 0 #ff5800; */
+  border-bottom: 2px solid #ff5800;
 }
 .side{
   z-index: -1;
